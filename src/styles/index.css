@@ -22,6 +22,12 @@
   --font-family-base: serif;
   --font-family-accent: serif;
 
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 4rem;
+
   --font-weight-sm: 300;
   --font-weight-md: 400;
   --font-weight-lg: 700;
@@ -44,8 +50,8 @@
   font: inherit;
 }
 
-ul[role='list'],
-ol[role='list'] {
+ul[role="list"],
+ol[role="list"] {
   list-style: none;
 }
 
@@ -93,12 +99,12 @@ body {
 }
 
 body {
-  font-size: 1rem;
   font-family: var(--font-family-base);
-  font-weight: 400;
-  line-height: 1.4;
-  color: var(--color-neutral-3);
-  background-color: var(--color-neutral-1);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-md);
+  line-height: var(--line-height-md);
+  color: var(--color-neutral-9);
+  background-color: var(--color-neutral-0);
 }
 
 /* Element/Component classes */
