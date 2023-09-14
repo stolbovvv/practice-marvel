@@ -1,0 +1,136 @@
+/* Imposrt fonts */
+
+/* Custom properties */
+
+:root {
+  --clr-nuetral-0: hsl(0, 0%, 100%);
+  --clr-nuetral-1: hsl(0, 0%, 90%);
+  --clr-nuetral-2: hsl(0, 0%, 80%);
+  --clr-nuetral-3: hsl(0, 0%, 70%);
+  --clr-nuetral-4: hsl(0, 0%, 60%);
+  --clr-nuetral-5: hsl(0, 0%, 50%);
+  --clr-nuetral-6: hsl(0, 0%, 40%);
+  --clr-nuetral-7: hsl(0, 0%, 30%);
+  --clr-nuetral-8: hsl(0, 0%, 20%);
+  --clr-nuetral-9: hsl(0, 0%, 10%);
+  --clr-nuetral-10: hsl(0, 0%, 0%);
+
+  --clr-red-1: hsl(0, 75%, 55%);
+  --clr-red-2: hsl(0, 75%, 45%);
+  --clr-red-3: hsl(0, 75%, 35%);
+
+  --font-family-base: serif;
+  --font-family-accent: serif;
+
+  --font-weight-sm: 300;
+  --font-weight-md: 400;
+  --font-weight-lg: 700;
+  --font-weight-xl: 900;
+
+  --line-height-sm: 1.2;
+  --line-height-md: 1.4;
+}
+
+/* Minimal reset – <https://piccalil.li/blog/a-modern-css-reset> */
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+img,
+svg,
+video,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* General styling */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-size: 1rem;
+  font-family: var(--font-family-base);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-neutral-3);
+  background-color: var(--color-neutral-1);
+}
+
+/* Element/Component classes */
+
+.button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Layouts styling */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+.wrapper > main {
+  flex: 1 1 auto;
+}
+.wrapper > header,
+.wrapper > footer {
+  flex: 0 0 auto;
+}
+
+/* Utility styling */
+
+.container {
+  width: min(75rem, calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: 2.5rem;
+}
