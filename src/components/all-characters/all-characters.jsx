@@ -1,3 +1,4 @@
+import { CharacterInfo } from '../character-info/character-info';
 import './all-characters.css';
 
 function AllCharactersItem() {
@@ -18,7 +19,9 @@ function AllCharacters() {
         <h2 className="all-characters__title">All characters</h2>
 
         <div className="all-characters__body">
-          <div className="all-characters__sidebar"></div>
+          <aside className="all-characters__sidebar">
+            <CharacterInfo />
+          </aside>
           <div className="all-characters__catalog">
             <ul className="all-characters__list">
               <AllCharactersItem />

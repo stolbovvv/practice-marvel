@@ -12,11 +12,14 @@
 .all-characters__body {
   display: grid;
   grid-template-columns: 3fr 2fr;
+  align-items: start;
   column-gap: 0.75rem;
 }
 .all-characters__sidebar {
   order: 1;
   margin: 0.25rem;
+  position: sticky;
+  top: 1.25rem;
 }
 .all-characters__catalog {
   display: flex;
