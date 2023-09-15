@@ -51,6 +51,7 @@
 
 /* Minimal reset – <https://piccalil.li/blog/a-modern-css-reset> */
 
+*,
 *::before,
 *::after {
   box-sizing: border-box;

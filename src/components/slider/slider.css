@@ -50,7 +50,7 @@
 .splide__slide-link {
   display: flex;
   flex-direction: column;
-  border: 0.125em solid transparent;
+  border: 0.125rem solid transparent;
   background-color: var(--clr-neutral-9);
   outline-offset: 0.25rem;
   text-decoration: none;
@@ -64,10 +64,12 @@
   object-fit: cover;
   object-position: center;
 }
+.splide__slide-body {
+  padding: 1em;
+  min-height: 5rem;
+}
 .splide__slide-name {
   font-family: var(--font-family-accent);
   font-weight: var(--font-weight-lh);
   line-height: var(--line-height-sm);
-  padding: 1em;
-  min-height: 2.5em;
 }

@@ -7,7 +7,9 @@ function Sldie() {
     <SplideSlide>
       <a className="splide__slide-link" href="#">
         <img className="splide__slide-img" src="https://placehold.co/300x400.png" alt="" />
-        <span className="splide__slide-name">Name</span>
+        <span className="splide__slide-body">
+          <span className="splide__slide-name">Name</span>
+        </span>
       </a>
     </SplideSlide>
   );
