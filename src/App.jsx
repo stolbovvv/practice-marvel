@@ -14,8 +14,8 @@ function App() {
         <SiteHero title={'Marvel Data Base'} />
         <RandomCharacter />
         <Slider title={'Latest Charcaters'} />
-        <Slider title={'Latest Comics'} />
         <AllCharacters />
+        <Slider title={'Latest Comics'} />
         <AllComics />
       </main>
       <SiteFooter />
