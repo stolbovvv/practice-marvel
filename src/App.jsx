@@ -4,6 +4,7 @@ import { SiteFooter } from './components/site-footer/site-footer';
 import { SiteHeader } from './components/site-header/site-header';
 import { SiteHero } from './components/site-hero/site-hero';
 import { Slider } from './components/slider/slider';
+import { AllCharacters } from './components/all-characters/all-characters';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <RandomCharacter />
         <Slider title={'Latest Charcaters'} />
         <Slider title={'Latest Comics'} />
+        <AllCharacters />
         <AllComics />
       </main>
       <SiteFooter />
