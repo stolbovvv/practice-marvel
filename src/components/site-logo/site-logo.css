@@ -1,6 +1,7 @@
 .site-logo {
   display: flex;
   align-items: center;
+  outline-offset: 0.25rem;
 }
 .site-logo > * + * {
   margin-left: 0.625rem;

@@ -127,6 +127,7 @@ body {
   border: 0.125em solid transparent;
   border-color: var(--clr-neutral-9);
   background-color: var(--clr-neutral-9);
+  outline-offset: 0.25rem;
   font-family: var(--font-family-accent);
   font-weight: var(--font-weight-lg);
   text-decoration: none;
