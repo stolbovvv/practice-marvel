@@ -10,8 +10,8 @@ function SiteMenu({ className }) {
   };
 
   return (
-    <nav className={'site-menu' + (className ? ` ${className}` : '')}>
-      <ul className="site__menu-list">
+    <nav className={['site-menu', className].join(' ').trim()}>
+      <ul className="site-menu__list">
         {menu.items.map(({ id, text, href }) => (
           <li key={id} className="site-menu__item">
             <a href={href} className="site-menu__link">

@@ -1,0 +1,28 @@
+.site-menu {
+  display: flex;
+  align-items: center;
+}
+.site-menu > * + * {
+  margin-left: 1.25rem;
+}
+.site-menu__list {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+}
+.site-menu__list > * + * {
+  margin-left: 0.625rem;
+}
+.site-menu__item {
+  line-height: var(--line-height-sm);
+}
+.site-menu__link {
+  font-family: var(--font-family-accent);
+  font-weight: var(--font-weight-lg);
+  text-decoration: none;
+  text-transform: uppercase;
+  color: inherit;
+}
+.site-menu__link:is(:hover, :focus) {
+  color: var(--clr-red-1);
+}

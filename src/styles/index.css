@@ -1,26 +1,29 @@
 /* Imposrt fonts */
 
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap");
+
 /* Custom properties */
 
 :root {
-  --clr-nuetral-0: hsl(0, 0%, 100%);
-  --clr-nuetral-1: hsl(0, 0%, 90%);
-  --clr-nuetral-2: hsl(0, 0%, 80%);
-  --clr-nuetral-3: hsl(0, 0%, 70%);
-  --clr-nuetral-4: hsl(0, 0%, 60%);
-  --clr-nuetral-5: hsl(0, 0%, 50%);
-  --clr-nuetral-6: hsl(0, 0%, 40%);
-  --clr-nuetral-7: hsl(0, 0%, 30%);
-  --clr-nuetral-8: hsl(0, 0%, 20%);
-  --clr-nuetral-9: hsl(0, 0%, 10%);
-  --clr-nuetral-10: hsl(0, 0%, 0%);
+  --clr-neutral-0: hsl(0, 0%, 100%);
+  --clr-neutral-1: hsl(0, 0%, 90%);
+  --clr-neutral-2: hsl(0, 0%, 80%);
+  --clr-neutral-3: hsl(0, 0%, 70%);
+  --clr-neutral-4: hsl(0, 0%, 60%);
+  --clr-neutral-5: hsl(0, 0%, 50%);
+  --clr-neutral-6: hsl(0, 0%, 40%);
+  --clr-neutral-7: hsl(0, 0%, 30%);
+  --clr-neutral-8: hsl(0, 0%, 20%);
+  --clr-neutral-9: hsl(0, 0%, 10%);
+  --clr-neutral-10: hsl(0, 0%, 0%);
 
   --clr-red-1: hsl(0, 75%, 55%);
   --clr-red-2: hsl(0, 75%, 45%);
   --clr-red-3: hsl(0, 75%, 35%);
 
-  --font-family-base: serif;
-  --font-family-accent: serif;
+  --font-family-base: "Open Sans", sans-serif;
+  --font-family-accent: "Montserrat", sans-serif;
 
   --font-size-sm: 0.875rem;
   --font-size-md: 1rem;
@@ -35,6 +38,15 @@
 
   --line-height-sm: 1.2;
   --line-height-md: 1.4;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
 /* Minimal reset – <https://piccalil.li/blog/a-modern-css-reset> */
@@ -103,16 +115,56 @@ body {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-md);
   line-height: var(--line-height-md);
-  color: var(--color-neutral-9);
-  background-color: var(--color-neutral-0);
+  color: var(--clr-neutral-9);
+  background-color: var(--clr-neutral-0);
 }
 
 /* Element/Component classes */
 
 .button {
   border: none;
-  background: none;
+  padding: 0.5em 1em;
+  border: 0.125em solid transparent;
+  border-color: var(--clr-neutral-9);
+  background-color: var(--clr-neutral-9);
+  font-family: var(--font-family-accent);
+  font-weight: var(--font-weight-lg);
+  text-decoration: none;
+  color: var(--clr-neutral-0);
   cursor: pointer;
+}
+.button:is(:hover, :focus) {
+  border-color: var(--clr-neutral-8);
+  background-color: var(--clr-neutral-8);
+}
+.button:is(:active) {
+  border-color: var(--clr-neutral-7);
+  background-color: var(--clr-neutral-7);
+}
+.button_white {
+  border-color: var(--clr-neutral-0);
+  background-color: var(--clr-neutral-0);
+  color: var(--clr-neutral-9);
+}
+.button_white:is(:hover, :focus) {
+  border-color: var(--clr-neutral-2);
+  background-color: var(--clr-neutral-2);
+}
+.button_white:is(:active) {
+  border-color: var(--clr-neutral-3);
+  background-color: var(--clr-neutral-3);
+}
+.button_red {
+  border-color: var(--clr-red-1);
+  background-color: var(--clr-red-1);
+}
+.button_red:is(:hover, :focus) {
+  border-color: var(--clr-red-2);
+  background-color: var(--clr-red-2);
+}
+.button_red:is(:active) {
+  border-color: var(--clr-red-3);
+  background-color: var(--clr-red-3);
 }
 
 /* Layouts styling */

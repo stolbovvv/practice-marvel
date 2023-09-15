@@ -1,0 +1,24 @@
+.site-footer {
+  padding-block: 1.25rem;
+}
+.site-footer__container > * + * {
+  margin-top: 1.25rem;
+}
+.site-footer__body,
+.site-footer__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-footer__name,
+.site-footer__tags {
+  font-size: var(--font-size-sm);
+}
+.site-footer__name > a {
+  text-decoration: none;
+  color: inherit;
+}
+.site-footer__name > a:is(:hover, :focus) {
+  text-decoration: underline;
+  color: var(--clr-red-1);
+}
