@@ -1,45 +1,40 @@
+import { Component } from 'react';
+import { MarvelService } from '../../services/MarvelService';
 import { CharacterInfo } from '../character-info/character-info';
+import { CharacterCatalog } from '../character-catalog/character-catalog';
+
 import './all-characters.css';
 
-function AllCharactersItem() {
-  return (
-    <li className="all-characters__item" tabIndex={0}>
-      <img className="all-characters__item-img" src="https://placehold.co/300x300.png" alt="" />
-      <div className="all-characters__item-body">
-        <p className="all-characters__item-name">Name</p>
-      </div>
-    </li>
-  );
-}
+class AllCharacters extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedId: null,
+    };
 
-function AllCharacters() {
-  return (
-    <section className="all-characters section">
-      <div className="all-characters__container container">
-        <h2 className="all-characters__title">All characters</h2>
+    this.marvelService = new MarvelService();
+  }
 
-        <div className="all-characters__body">
-          <aside className="all-characters__sidebar">
-            <CharacterInfo />
-          </aside>
-          <div className="all-characters__catalog">
-            <ul className="all-characters__list">
-              <AllCharactersItem />
-              <AllCharactersItem />
-              <AllCharactersItem />
-              <AllCharactersItem />
-              <AllCharactersItem />
-              <AllCharactersItem />
-              <AllCharactersItem />
-              <AllCharactersItem />
-              <AllCharactersItem />
-            </ul>
-            <button className="all-characters__button button button_red">Load more</button>
+  onSelect = (id) => {
+    this.setState({
+      selectedId: id,
+    });
+  };
+
+  render() {
+    return (
+      <section className="all-characters section">
+        <div className="all-characters__container container">
+          <h2 className="all-characters__title">All characters</h2>
+
+          <div className="all-characters__body">
+            <CharacterInfo className={'all-characters__sidebar'} charactreId={this.state.selectedId} />
+            <CharacterCatalog className={'all-characters__catalog'} onSelect={this.onSelect} />
           </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  }
 }
 
 export { AllCharacters };

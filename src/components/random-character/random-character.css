@@ -10,7 +10,7 @@
 .random-character__body {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 13.75rem;
+  min-height: 14rem;
   border: 0.125rem solid var(--clr-neutral-9);
   box-shadow: var(--shadow-lg);
 }
@@ -23,10 +23,15 @@
 .random-character__main > * + * {
   margin-left: 0.625rem;
 }
+.random-character__main-error {
+  width: 100%;
+  height: 100%;
+}
 .random-character__main-img {
   flex: 0 0 auto;
   width: 12.5rem;
-  height: min(12.5rem, auto);
+  height: 12.5rem;
+  align-self: stretch;
   object-fit: cover;
   object-position: center;
 }

@@ -1,0 +1,43 @@
+.character-catalog {
+  display: flex;
+  flex-direction: column;
+}
+.character-catalog > * + * {
+  margin-top: 2.5rem;
+}
+.character-catalog__error {
+  align-self: center;
+}
+.character-catalog__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem 0.75rem;
+  list-style: none;
+}
+.character-catalog__list-item {
+  margin: 0.25rem;
+  border: 0.125rem solid transparent;
+  background-color: var(--clr-neutral-9);
+  outline-offset: 0.25rem;
+  cursor: pointer;
+}
+.character-catalog__list-item:is(:hover, :focus) {
+  background-color: var(--clr-red-1);
+}
+.character-catalog__list-item-img {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center;
+}
+.character-catalog__list-item-body {
+  min-height: 5rem;
+  padding: 1rem;
+}
+.character-catalog__list-item-name {
+  font-family: var(--font-family-accent);
+  font-weight: var(--font-weight-lg);
+  color: var(--clr-neutral-0);
+}
+.character-catalog__button {
+  align-self: center;
+}

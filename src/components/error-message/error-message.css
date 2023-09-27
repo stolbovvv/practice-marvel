@@ -1,0 +1,28 @@
+.error-message {
+  position: relative;
+  padding: 0.625rem;
+  box-shadow: var(--shadow-lg);
+  background-color: var(--clr-red-1);
+  color: var(--clr-neutral-0);
+  overflow: hidden;
+  z-index: 1;
+}
+.error-message::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background: url("/bug.svg") right bottom / contain no-repeat;
+  opacity: 0.125;
+  z-index: -1;
+}
+.error-message > * + * {
+  margin-top: 0.5em;
+}
+.error-message__title {
+  font-family: var(--font-family-accent);
+  font-weight: var(--font-weight-lg);
+  font-size: var(--font-size-lg);
+}
+.error-message__descr {
+  color: var(--clr-neutral-1);
+}

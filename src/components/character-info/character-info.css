@@ -1,5 +1,54 @@
 .character-info {
+  display: flex;
+  flex-direction: column;
+}
+.character-info__placeholder {
+  padding: 0.625rem 0.625rem 0.625rem 1.25rem;
+  background-color: var(--clr-neutral-9);
+  background-image: url("/texture.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--clr-neutral-0);
+}
+.character-info__placeholder-text {
+  font-family: var(--font-family-accent);
+  font-weight: var(--font-weight-xl);
+  font-size: var(--font-size-lg);
+}
+.character-info__loading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.625rem 0.625rem 0.625rem 1.25rem;
+  background-color: var(--clr-neutral-9);
+  background-image: url("/texture.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--clr-neutral-0);
+}
+.character-info__loading-text {
+  font-family: var(--font-family-accent);
+  font-weight: var(--font-weight-xl);
+  font-size: var(--font-size-lg);
+}
+.character-info__loading-spinner {
+  margin-inline: 0.25rem;
+}
+.character-info__error {
+  width: 100%;
+}
+.character-info__body {
+  display: flex;
+  flex-direction: column;
+  min-height: 22.5rem;
   border: 0.125rem solid var(--clr-neutral-9);
+  background-image: url("/texture.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .character-info__head {
   display: flex;
@@ -11,7 +60,9 @@
 .character-info__head-img {
   flex: 0 0 auto;
   width: 12.5rem;
-  height: min(12.5rem, auto);
+  height: 12.5rem;
+  object-fit: cover;
+  object-position: center;
 }
 .character-info__head-body {
   flex: 1 1 auto;
@@ -32,6 +83,7 @@
   padding-inline: 0.625rem;
 }
 .character-info__comics {
+  flex: 1 1 auto;
   margin-top: 0.625rem;
   padding-block: 1.25rem 0.625rem;
   padding-inline: 0.625rem;
@@ -50,12 +102,8 @@
   margin-top: 0.5em;
 }
 .character-info__comics-item {
-}
-.character-info__comics-link {
-  line-height: var(--line-height-sm);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-md);
   text-decoration: none;
   color: var(--clr-neutral-2);
-}
-.character-info__comics-link:is(:hover, :focus) {
-  color: var(--clr-red-1);
 }

@@ -123,6 +123,8 @@ body {
 /* Element/Component classes */
 
 .button {
+  display: flex;
+  align-items: center;
   border: none;
   padding: 0.5em 1em;
   border: 0.125em solid transparent;
@@ -135,6 +137,9 @@ body {
   color: var(--clr-neutral-0);
   cursor: pointer;
 }
+.button > * + * {
+  margin-left: 0.625em;
+}
 .button:is(:hover, :focus) {
   border-color: var(--clr-neutral-8);
   background-color: var(--clr-neutral-8);
@@ -142,6 +147,10 @@ body {
 .button:is(:active) {
   border-color: var(--clr-neutral-7);
   background-color: var(--clr-neutral-7);
+}
+.button:is(:disabled) {
+  filter: grayscale(1) opacity(0.25);
+  pointer-events: none;
 }
 .button_white {
   border-color: var(--clr-neutral-0);

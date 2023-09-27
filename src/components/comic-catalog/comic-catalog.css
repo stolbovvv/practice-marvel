@@ -1,0 +1,54 @@
+.comic-catalog {
+  display: flex;
+  flex-direction: column;
+}
+.comic-catalog > * + * {
+  margin-top: 2.5rem;
+}
+.comic-catalog__list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25rem 0.75rem;
+  list-style: none;
+}
+.comic-catalog__list-item {
+  padding: 0.25rem;
+}
+.comic-catalog__list-item-link {
+  display: flex;
+  flex-direction: column;
+  border: 0.125rem solid transparent;
+  background-color: var(--clr-neutral-9);
+  color: var(--clr-neutral-0);
+  text-decoration: none;
+  outline-offset: 0.25rem;
+}
+.comic-catalog__list-item-link:is(:hover, :focus) {
+  background-color: var(--clr-red-1);
+}
+.comic-catalog__list-item-img {
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: center;
+}
+.comic-catalog__list-item-body {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  min-height: 6.25rem;
+}
+.comic-catalog__list-item-body > * + * {
+  padding-top: 0.25em;
+}
+.comic-catalog__list-item-name {
+  font-family: var(--font-family-accent);
+  font-weight: var(--font-weight-lg);
+}
+.comic-catalog__list-item-price {
+  margin-top: auto;
+  font-size: var(--font-size-sm);
+  color: var(--clr-neutral-4);
+}
+.comic-catalog__button {
+  align-self: center;
+}
