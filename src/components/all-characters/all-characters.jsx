@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { MarvelService } from '../../services/MarvelService';
+import { ErrorBoundary } from '../error-boundary/error-boundary';
 import { CharacterInfo } from '../character-info/character-info';
 import { CharacterCatalog } from '../character-catalog/character-catalog';
 
@@ -28,8 +29,12 @@ class AllCharacters extends Component {
           <h2 className="all-characters__title">All characters</h2>
 
           <div className="all-characters__body">
-            <CharacterInfo className={'all-characters__sidebar'} charactreId={this.state.selectedId} />
-            <CharacterCatalog className={'all-characters__catalog'} onSelect={this.onSelect} />
+            <ErrorBoundary>
+              <CharacterCatalog className={'all-characters__catalog'} onSelect={this.onSelect} />
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <CharacterInfo className={'all-characters__sidebar'} charactreId={this.state.selectedId} />
+            </ErrorBoundary>
           </div>
         </div>
       </section>

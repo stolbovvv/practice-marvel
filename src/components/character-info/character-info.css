@@ -1,6 +1,7 @@
 .character-info {
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow-lg);
 }
 .character-info__placeholder {
   padding: 0.625rem 0.625rem 0.625rem 1.25rem;
@@ -43,7 +44,7 @@
 .character-info__body {
   display: flex;
   flex-direction: column;
-  min-height: 22.5rem;
+  min-height: 18.5rem;
   border: 0.125rem solid var(--clr-neutral-9);
   background-image: url("/texture.png");
   background-position: center;
@@ -85,7 +86,7 @@
 .character-info__comics {
   flex: 1 1 auto;
   margin-top: 0.625rem;
-  padding-block: 1.25rem 0.625rem;
+  padding-block: 1.25rem 1.125rem;
   padding-inline: 0.625rem;
   background-color: var(--clr-neutral-9);
   color: var(--clr-neutral-0);

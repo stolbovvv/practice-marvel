@@ -36,14 +36,16 @@ function CharacterInfoContent({ data }) {
         <p>{data.text}</p>
       </div>
       <div className="character-info__comics">
-        <h4 className="character-info__comics-title">Comics:</h4>
-        <ul className="character-info__comics-list">
-          {comics.map(({ name }, index) => (
-            <li key={index} className="character-info__comics-item">
-              {name}
-            </li>
-          ))}
-        </ul>
+        <h4 className="character-info__comics-title">Comics{comics.length ? ':' : ' not found'}</h4>
+        {comics.length ? (
+          <ul className="character-info__comics-list">
+            {comics.map(({ name }, index) => (
+              <li key={index} className="character-info__comics-item">
+                {name}
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </div>
     </div>
   );

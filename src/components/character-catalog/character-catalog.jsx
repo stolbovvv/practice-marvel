@@ -12,8 +12,20 @@ function CharacterCatalogListItem({ img, name, onSelect }) {
     style.objectPosition = 'left bottom';
   }
 
+  const onKeyDown = (e) => {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      onSelect();
+    }
+
+    if (e.code === 'Enter') {
+      e.preventDefault();
+      onSelect();
+    }
+  };
+
   return (
-    <li className="character-catalog__list-item" onClick={onSelect}>
+    <li className="character-catalog__list-item" tabIndex={0} onClick={onSelect} onKeyDown={onKeyDown}>
       <img className="character-catalog__list-item-img" src={img} alt={name} style={style} />
       <div className="character-catalog__list-item-body">
         <span className="character-catalog__list-item-name">{name}</span>
@@ -65,6 +77,7 @@ class CharacterCatalog extends Component {
     this.setState(({ charactres, offset }) => ({
       charactres: [...charactres, ...data],
       isLoading: false,
+      isEnded: data.length < this.marvelServiceLimit,
       isError: false,
       offset: offset + this.marvelServiceLimit,
     }));
@@ -84,7 +97,7 @@ class CharacterCatalog extends Component {
 
   render() {
     const { className, onSelect } = this.props;
-    const { charactres, isLoading, isError } = this.state;
+    const { charactres, isLoading, isEnded, isError } = this.state;
 
     const error = isError ? <ErrorMessage className={'character-catalog__error'} /> : null;
     const content = !isError ? <CharacterCatalogList data={charactres} onSelect={onSelect} /> : null;
@@ -93,7 +106,9 @@ class CharacterCatalog extends Component {
       <div className={['character-catalog', className].join(' ').trim()}>
         {error || content}
         <button
+          ref={this.ref}
           className="character-catalog__button button button_red"
+          style={{ display: isEnded ? 'none' : 'block' }}
           onClick={this.updateCharacters}
           disabled={isLoading}
         >

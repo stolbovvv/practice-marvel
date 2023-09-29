@@ -1,4 +1,5 @@
 import { ComicCatalog } from '../comic-catalog/comic-catalog';
+import { ErrorBoundary } from '../error-boundary/error-boundary';
 
 import './all-comics.css';
 
@@ -9,7 +10,9 @@ function AllComics() {
         <h2 className="all-comics__title">All comics</h2>
 
         <div className="all-comics__body">
-          <ComicCatalog className={'all-comics__catalog'} />
+          <ErrorBoundary>
+            <ComicCatalog className={'all-comics__catalog'} />
+          </ErrorBoundary>
         </div>
       </div>
     </section>

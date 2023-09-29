@@ -68,7 +68,7 @@ class ComicCatalog extends Component {
     this.setState(({ comics, offset }) => ({
       comics: [...comics, ...data],
       isLoading: false,
-      isEnded: false,
+      isEnded: data.length < this.marvelServiceLimit,
       offset: offset + this.marvelServiceLimit,
     }));
   };
@@ -83,7 +83,7 @@ class ComicCatalog extends Component {
 
   render() {
     const { className } = this.props;
-    const { comics, isLoading, isError } = this.state;
+    const { comics, isLoading, isEnded, isError } = this.state;
 
     const error = isError ? <ErrorMessage className={'comic-catalog__error'} /> : null;
     const content = !isError ? <ComicCatalogList data={comics} /> : null;
@@ -91,7 +91,12 @@ class ComicCatalog extends Component {
     return (
       <div className={['comic-catalog', className].join(' ').trim()}>
         {error || content}
-        <button className="comic-catalog__button button button__red" onClick={this.updateComics} disabled={isLoading}>
+        <button
+          className="comic-catalog__button button button__red"
+          style={{ display: isEnded ? 'none' : 'block' }}
+          onClick={this.updateComics}
+          disabled={isLoading}
+        >
           {isLoading ? <Spinner size="1.25rem" /> : 'Load more'}
         </button>
       </div>
