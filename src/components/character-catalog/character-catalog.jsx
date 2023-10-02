@@ -1,17 +1,13 @@
-import { Component } from 'react';
-import { MarvelService } from '../../services/MarvelService';
+import { useEffect } from 'react';
+import { useList } from '../../hooks/useList';
+import { setThumbnailStyles } from '../../utilites';
+import { useMarvelService } from '../../services/useMarvelService';
 import { ErrorMessage } from '../error-message/error-message';
 import { Spinner } from '../spinner/spinner';
 
 import './character-catalog.css';
 
 function CharacterCatalogListItem({ img, name, onSelect }) {
-  const style = {};
-
-  if (img.match('image_not_available')) {
-    style.objectPosition = 'left bottom';
-  }
-
   const onKeyDown = (e) => {
     if (e.code === 'Space') {
       e.preventDefault();
@@ -26,7 +22,7 @@ function CharacterCatalogListItem({ img, name, onSelect }) {
 
   return (
     <li className="character-catalog__list-item" tabIndex={0} onClick={onSelect} onKeyDown={onKeyDown}>
-      <img className="character-catalog__list-item-img" src={img} alt={name} style={style} />
+      <img className="character-catalog__list-item-img" src={img} alt={name} style={setThumbnailStyles(img)} />
       <div className="character-catalog__list-item-body">
         <span className="character-catalog__list-item-name">{name}</span>
       </div>
@@ -44,79 +40,34 @@ function CharacterCatalogList({ data, onSelect }) {
   );
 }
 
-class CharacterCatalog extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      charactres: [],
-      isLoading: true,
-      isError: false,
-      isEnded: false,
-      offset: 0,
-    };
+function CharacterCatalog({ className, onSelect }) {
+  const { loading, error, get } = useMarvelService();
+  const { list, ended, limit, offset, updateList } = useList(9);
 
-    this.marvelService = new MarvelService();
-    this.marvelServiceLimit = 9;
-  }
-
-  onError = () => {
-    this.setState({
-      isLoading: false,
-      isError: true,
+  const updateCharacters = () => {
+    get.characters({ limit, offset }).then((data) => {
+      updateList(data);
     });
   };
 
-  onLoading = () => {
-    this.setState({
-      isLoading: true,
-      isError: false,
-    });
-  };
+  useEffect(() => {
+    updateCharacters();
+  }, []);
 
-  onUpdate = (data) => {
-    this.setState(({ charactres, offset }) => ({
-      charactres: [...charactres, ...data],
-      isLoading: false,
-      isEnded: data.length < this.marvelServiceLimit,
-      isError: false,
-      offset: offset + this.marvelServiceLimit,
-    }));
-  };
-
-  updateCharacters = () => {
-    this.onLoading();
-    this.marvelService
-      .getCharacters({ limit: this.marvelServiceLimit, offset: this.state.offset })
-      .then((data) => this.onUpdate(data))
-      .catch((err) => this.onError(err));
-  };
-
-  componentDidMount() {
-    this.updateCharacters();
-  }
-
-  render() {
-    const { className, onSelect } = this.props;
-    const { charactres, isLoading, isEnded, isError } = this.state;
-
-    const error = isError ? <ErrorMessage className={'character-catalog__error'} /> : null;
-    const content = !isError ? <CharacterCatalogList data={charactres} onSelect={onSelect} /> : null;
-
-    return (
-      <div className={['character-catalog', className].join(' ').trim()}>
-        {error || content}
-        <button
-          ref={this.ref}
-          className="character-catalog__button button button_red"
-          style={{ display: isEnded ? 'none' : 'block' }}
-          onClick={this.updateCharacters}
-          disabled={isLoading}
-        >
-          {isLoading ? <Spinner size="1.25rem" /> : 'Load more'}
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div className={['character-catalog', className].join(' ').trim()}>
+      {error ? <ErrorMessage className={'character-catalog__error'} /> : null}
+      {error ? null : <CharacterCatalogList data={list} onSelect={onSelect} />}
+      <button
+        className="character-catalog__button button button_red"
+        style={{ display: ended ? 'none' : 'block' }}
+        onClick={updateCharacters}
+        disabled={loading}
+      >
+        {loading ? <Spinner size="1.25rem" /> : 'Load more'}
+      </button>
+    </div>
+  );
 }
 
 export { CharacterCatalog };

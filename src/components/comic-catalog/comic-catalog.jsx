@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { MarvelService } from '../../services/MarvelService';
 import { ErrorMessage } from '../error-message/error-message';
 import { Spinner } from '../spinner/spinner';
@@ -35,73 +35,54 @@ function ComicCatalogList({ data }) {
   );
 }
 
-class ComicCatalog extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      comics: [],
-      isLoading: true,
-      isError: false,
-      isEnded: false,
-      offset: 0,
-    };
+function ComicCatalog({ className }) {
+  const [comics, setComics] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [isEnded, setIsEnded] = useState(false);
+  const [offset, setOffset] = useState(0);
 
-    this.marvelService = new MarvelService();
-    this.marvelServiceLimit = 12;
-  }
+  const marvelServiceLimit = 12;
 
-  onError = () => {
-    this.setState({
-      isLoading: false,
-      isError: false,
-    });
+  const onError = () => {
+    setIsLoading(false);
+    setIsError(false);
   };
 
-  onLoading = () => {
-    this.setState({
-      isLoading: true,
-      isError: false,
-    });
+  const onLoading = () => {
+    setIsLoading(true);
+    setIsError(false);
   };
 
-  onUpdate = (data) => {
-    this.setState(({ comics, offset }) => ({
-      comics: [...comics, ...data],
-      isLoading: false,
-      isEnded: data.length < this.marvelServiceLimit,
-      offset: offset + this.marvelServiceLimit,
-    }));
+  const onUpdate = (data) => {
+    setComics((comics) => [...comics, ...data]);
+    setIsLoading(false);
+    setIsEnded(data.length < marvelServiceLimit);
+    setOffset((offset) => offset + marvelServiceLimit);
   };
 
-  updateComics = () => {
-    this.onLoading();
-  };
+  const updateComics = useCallback(() => {
+    onLoading();
+  }, []);
 
-  componentDidMount() {
-    this.updateComics();
-  }
+  useEffect(() => {
+    updateComics();
+  }, [updateComics]);
 
-  render() {
-    const { className } = this.props;
-    const { comics, isLoading, isEnded, isError } = this.state;
-
-    const error = isError ? <ErrorMessage className={'comic-catalog__error'} /> : null;
-    const content = !isError ? <ComicCatalogList data={comics} /> : null;
-
-    return (
-      <div className={['comic-catalog', className].join(' ').trim()}>
-        {error || content}
-        <button
-          className="comic-catalog__button button button__red"
-          style={{ display: isEnded ? 'none' : 'block' }}
-          onClick={this.updateComics}
-          disabled={isLoading}
-        >
-          {isLoading ? <Spinner size="1.25rem" /> : 'Load more'}
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div className={['comic-catalog', className].join(' ').trim()}>
+      {isError ? <ErrorMessage className={'comic-catalog__error'} /> : null}
+      {isError ? null : <ComicCatalogList data={comics} />}
+      <button
+        className="comic-catalog__button button button__red"
+        style={{ display: isEnded ? 'none' : 'block' }}
+        onClick={this.updateComics}
+        disabled={isLoading}
+      >
+        {isLoading ? <Spinner size="1.25rem" /> : 'Load more'}
+      </button>
+    </div>
+  );
 }
 
 export { ComicCatalog };

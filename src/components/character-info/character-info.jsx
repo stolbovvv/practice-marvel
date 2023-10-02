@@ -1,9 +1,9 @@
-import { Component } from 'react';
-import { MarvelService } from '../../services/MarvelService';
+import { useEffect, useState } from 'react';
+import { useMarvelService } from '../../services/useMarvelService';
 import { ErrorMessage } from '../error-message/error-message';
+import { Spinner } from '../spinner/spinner';
 
 import './character-info.css';
-import { Spinner } from '../spinner/spinner';
 
 function CharacterInfoContent({ data }) {
   const style = {};
@@ -68,69 +68,26 @@ function CharacterInfoPlaceholder() {
   );
 }
 
-class CharacterInfo extends Component {
-  constructor(props) {
-    super(props);
-    this.marvelService = new MarvelService();
-    this.state = {
-      character: null,
-      isLoading: false,
-      isError: false,
-    };
-  }
+function CharacterInfo({ className, charactreId }) {
+  const { loading, error, get } = useMarvelService();
+  const [character, setCharacter] = useState(null);
 
-  onLoading = () => {
-    this.setState({
-      isLoading: true,
-      isError: false,
+  useEffect(() => {
+    if (!charactreId) return;
+
+    get.character(charactreId).then((data) => {
+      setCharacter(data);
     });
-  };
+  }, [charactreId]);
 
-  onOpdate = (data) => {
-    this.setState({
-      character: data,
-      isLoading: false,
-      isError: false,
-    });
-  };
-
-  onError = (err) => {
-    this.setState({
-      isLoading: false,
-      isError: true,
-      error: err,
-    });
-  };
-
-  handleUpdate = () => {
-    if (!this.props.charactreId) return;
-
-    this.onLoading();
-    this.marvelService
-      .getCharacter(this.props.charactreId)
-      .then((data) => this.onOpdate(data))
-      .catch((err) => this.onError(err));
-  };
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.charactreId !== this.props.charactreId && this.props.charactreId) this.handleUpdate();
-  }
-
-  render() {
-    const { className } = this.props;
-    const { character, isLoading, isError } = this.state;
-
-    const error = isError ? <ErrorMessage className={'character-info__error'} /> : null;
-    const loading = isLoading ? <CharacterInfoLoading /> : null;
-    const content = !isError && !isLoading && character ? <CharacterInfoContent data={character} /> : null;
-    const placeholder = !isError && !isLoading && !character ? <CharacterInfoPlaceholder /> : null;
-
-    return (
-      <aside className={['character-info', className].join(' ').trim()}>
-        {error || loading || content || placeholder}
-      </aside>
-    );
-  }
+  return (
+    <aside className={['character-info', className].join(' ').trim()}>
+      {error ? <ErrorMessage className={'character-info__error'} /> : null}
+      {loading ? <CharacterInfoLoading /> : null}
+      {!loading && !error && character ? <CharacterInfoContent data={character} /> : null}
+      {!loading && !error && !character ? <CharacterInfoPlaceholder /> : null}
+    </aside>
+  );
 }
 
 export { CharacterInfo };
