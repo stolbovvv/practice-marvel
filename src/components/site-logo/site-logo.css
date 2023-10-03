@@ -1,11 +1,14 @@
 .site-logo {
   display: flex;
   align-items: center;
-  outline-offset: 0.25rem;
 }
-.site-logo > * + * {
-  margin-left: 0.625rem;
+.site-logo__link {
+  text-decoration: none;
+  color: inherit;
 }
-.site-logo__icon {
-  width: 6.25rem;
+.site-logo__link > * + * {
+  margin-left: 1.25rem;
+}
+.site-logo__link-icon {
+  flex: 0 0 auto;
 }

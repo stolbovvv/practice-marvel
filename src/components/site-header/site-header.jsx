@@ -1,13 +1,19 @@
 import { SiteLogo } from '../site-logo/site-logo';
 import { SiteMenu } from '../site-menu/site-menu';
+
 import './site-header.css';
 
 function SiteHeader() {
+  const menuData = [
+    { id: 1, text: 'Characters', href: '/practice-marvel-app/characters' },
+    { id: 2, text: 'Comics', href: '/practice-marvel-app/comics' },
+  ];
+
   return (
     <header className="site-header">
-      <div className="site-header__container container">
+      <div className="container site-header__conteiner">
         <SiteLogo className={'site-header__logo'} />
-        <SiteMenu className={'site-header__menu'} />
+        <SiteMenu className={'site-header__menu'} data={menuData} />
       </div>
     </header>
   );

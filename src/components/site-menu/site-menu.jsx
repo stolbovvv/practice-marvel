@@ -1,25 +1,19 @@
+import { setClassName } from '../../utilites';
+
 import './site-menu.css';
 
-function SiteMenu({ className }) {
-  const menu = {
-    items: [
-      { id: 1, text: 'Home', href: '/' },
-      { id: 2, text: 'Characters', href: '/characters' },
-      { id: 3, text: 'Comics', href: '/comics' },
-    ],
-  };
+function SiteMenu({ className, data }) {
+  const items = data.map(({ id, text, href }) => (
+    <li className="site-menu__item" key={id}>
+      <a className="site-menu__link" href={href || '#'}>
+        {text}
+      </a>
+    </li>
+  ));
 
   return (
-    <nav className={['site-menu', className].join(' ').trim()}>
-      <ul className="site-menu__list">
-        {menu.items.map(({ id, text, href }) => (
-          <li key={id} className="site-menu__item">
-            <a href={href} className="site-menu__link">
-              {text}
-            </a>
-          </li>
-        ))}
-      </ul>
+    <nav className={setClassName('site-menu', className)}>
+      <ul className="site-menu__list">{items}</ul>
     </nav>
   );
 }

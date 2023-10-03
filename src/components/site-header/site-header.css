@@ -1,8 +1,13 @@
 .site-header {
   padding-block: 1.25rem;
 }
-.site-header__container {
+.site-header__conteiner {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
+}
+.site-header__logo {
+  width: 6.25rem;
+}
+.site-header__menu {
 }

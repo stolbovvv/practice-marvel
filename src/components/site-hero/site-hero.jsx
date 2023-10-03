@@ -1,9 +1,9 @@
 import './site-hero.css';
 
-function SiteHero({ className, title = '' }) {
+function SiteHero({ title }) {
   return (
-    <section className={['site-hero', className].join(' ').trim()}>
-      <div className="site-hero__container container">
+    <section className="site-hero">
+      <div className="container site-hero__container">
         <h1 className="site-hero__title">{title}</h1>
       </div>
     </section>

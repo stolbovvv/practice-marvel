@@ -1,4 +1,6 @@
-import { setDescriptionText } from './setDescriptionText';
-import { setThumbnailStyles } from './setThumbnailStyles';
+import { setClassName } from './setClassName';
+import { setTextLength } from './setTextLength';
+import { setImageStyles } from './setImageStyles';
+import { transformCharatersData, transformComicsData } from './transformData';
 
-export { setDescriptionText, setThumbnailStyles };
+export { setClassName, setImageStyles, setTextLength, transformCharatersData, transformComicsData };

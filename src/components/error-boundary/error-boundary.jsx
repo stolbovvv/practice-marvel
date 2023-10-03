@@ -1,25 +1,27 @@
 import { Component } from 'react';
-import { ErrorMessage } from '../error-message/error-message';
 
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isError: false,
+      info: null,
+      error: null,
+      hasError: false,
     };
   }
 
-  componentDidCatch(error, descr) {
-    this.setState({ isError: true });
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
 
-    console.error(error);
-    console.error(descr);
+  componentDidCatch(error, info) {
+    this.setState({ error, info });
   }
 
   render() {
-    if (this.state.isError) return <ErrorMessage />;
+    if (this.state.hasError) return this.props.fallback;
 
-    return this.props.children;
+    return this.props.element;
   }
 }
 
