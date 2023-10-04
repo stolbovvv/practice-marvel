@@ -1,7 +1,7 @@
 .all-caharacters {
 }
 .all-caharacters__container > * + * {
-  margin-top: 1.25rem;
+  margin-top: 2.25rem;
 }
 .all-caharacters__title {
 }

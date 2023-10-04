@@ -4,6 +4,7 @@
 }
 .site-logo__link {
   text-decoration: none;
+  outline-offset: 0.25rem;
   color: inherit;
 }
 .site-logo__link > * + * {

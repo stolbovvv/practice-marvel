@@ -12,7 +12,7 @@ function View({ data, onSelect }) {
   return (
     <ul className="character-list__body">
       {data.map((item) => (
-        <CharacterIistItem key={item.id} data={item} onSelect={() => onSelect(item.id)} />
+        <CharacterIistItem key={item.id} data={item} onSelect={onSelect} />
       ))}
     </ul>
   );

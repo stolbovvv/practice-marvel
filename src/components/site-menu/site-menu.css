@@ -11,6 +11,7 @@
 .site-menu__item {
 }
 .site-menu__link {
+  outline-offset: 0.25rem;
   font-family: var(--font-family-accent);
   font-weight: var(--font-weight-lg);
   text-decoration: none;

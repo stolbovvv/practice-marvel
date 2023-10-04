@@ -16,7 +16,7 @@ export function transformComicsData(data) {
     descr: data.description,
     title: data.title,
     image: data.thumbnail.path + '.' + data.thumbnail.extension,
-    prices: data.prices.price,
+    price: data.prices[0].price,
     pageCount: data.pageCount,
   };
 }

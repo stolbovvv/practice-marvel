@@ -1,0 +1,11 @@
+.all-comics {
+}
+.all-comics__container > * + * {
+  margin-top: 2.25rem;
+}
+.all-comics__title {
+}
+.all-comics__body {
+}
+.all-comics__list {
+}

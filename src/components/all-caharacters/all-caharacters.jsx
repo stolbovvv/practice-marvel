@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { CharacterInfo } from '../character-info/character-info';
 import { CharacterList } from '../character-list/character-list';
 
@@ -7,9 +7,9 @@ import './all-caharacters.css';
 function AllCharacters() {
   const [selecetd, setSeleced] = useState(null);
 
-  const onSelect = (id) => {
+  const onSelect = useCallback((id) => {
     setSeleced(id);
-  };
+  }, []);
 
   return (
     <section className="section all-caharacters">
