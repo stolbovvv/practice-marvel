@@ -1,0 +1,19 @@
+.all-caharacters {
+}
+.all-caharacters__container > * + * {
+  margin-top: 1.25rem;
+}
+.all-caharacters__title {
+}
+.all-caharacters__body {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  align-items: start;
+  column-gap: 1.25rem;
+}
+.all-caharacters__list {
+}
+.all-caharacters__info {
+  position: sticky;
+  top: 1.25rem;
+}

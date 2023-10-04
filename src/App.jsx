@@ -1,3 +1,4 @@
+import { AllCharacters } from './components/all-caharacters/all-caharacters';
 import { RandomCharacter } from './components/random-character/random-character';
 import { SiteFooter } from './components/site-footer/site-footer';
 import { SiteHeader } from './components/site-header/site-header';
@@ -10,6 +11,7 @@ function App() {
       <main className="site-main">
         <SiteHero title={'Marvel data base'} />
         <RandomCharacter />
+        <AllCharacters />
       </main>
       <SiteFooter />
     </>

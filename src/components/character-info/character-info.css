@@ -1,0 +1,85 @@
+.character-info {
+  display: flex;
+  flex-direction: column;
+  border: 0.125rem solid var(--clr-neutral-9);
+  box-shadow: var(--shadow-lg);
+  background: url("/texture.png") center / cover no-repeat;
+}
+.character-info > * + * {
+  margin-top: 0.625rem;
+}
+.character-info__error {
+  margin: 0.625rem;
+}
+.character-info__spinner {
+  margin: 0.625rem auto;
+  min-height: 19rem;
+}
+.character-info__placeholder {
+  padding: 0.625rem;
+  background: var(--clr-neutral-9) url("/texture.png") center / cover no-repeat;
+  color: var(--clr-neutral-0);
+}
+.character-info__placeholder-text {
+  font-family: var(--font-family-accent);
+  font-weight: var(--font-weight-xl);
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-sm);
+}
+.character-info__head {
+  display: flex;
+  padding: 0.625rem 0.625rem 0 0.625rem;
+}
+.character-info__head > * + * {
+  margin-left: 0.625rem;
+}
+.character-info__head-image {
+  width: 12.25rem;
+  height: 12.25rem;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+.character-info__head-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+.character-info__head-body > * + * {
+  margin-top: 0.625rem;
+}
+.character-info__head-name {
+  margin-bottom: auto;
+  font-family: var(--font-family-accent);
+  font-weight: var(--font-weight-xl);
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-sm);
+}
+.character-info__text {
+  padding-inline: 0.625rem;
+}
+.character-info__list {
+  padding: 0.625rem 0.625rem 0.875rem 0.625rem;
+  background: var(--clr-neutral-9);
+  color: var(--clr-neutral-0);
+}
+.character-info__list > * + * {
+  margin-top: 0.625rem;
+}
+.character-info__list-title {
+  font-family: var(--font-family-accent);
+  font-weight: var(--font-weight-lg);
+  line-height: var(--line-height-sm);
+}
+.character-info__list-body {
+  padding-left: 1.25em;
+}
+.character-info__list-body > * + * {
+  margin-top: 0.5em;
+}
+.character-info__list-item {
+  font-size: var(--font-size-sm);
+  color: var(--clr-neutral-2);
+}
+.character-info__list-text {
+  color: var(--clr-neutral-2);
+}

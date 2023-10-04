@@ -1,8 +1,8 @@
-.spinner-icon__body {
+.spinner__body {
   transform-origin: center;
   animation: spinner_anim-1 2s linear infinite;
 }
-.spinner-icon__body circle {
+.spinner__body circle {
   stroke-linecap: round;
   animation: spinner_amin-2 1.5s ease-in-out infinite;
 }

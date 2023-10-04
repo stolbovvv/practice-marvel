@@ -7,68 +7,77 @@
 }
 .random-character__body {
   display: flex;
-  min-height: 13.75rem;
-  border: 0.25rem solid var(--clr-neutral-9);
+  min-height: 14rem;
+  border: 0.125rem solid var(--clr-neutral-9);
+  box-shadow: var(--shadow-lg);
 }
 .random-character__error {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
+  width: calc(50% - 1.25rem);
   margin: 0.625rem;
 }
 .random-character__spinner {
-  flex: 1 1 auto;
   margin: auto;
 }
-.random-character__main {
-  flex: 0 0 auto;
+.random-character__content {
   display: flex;
-  gap: 0.625rem;
   width: 50%;
   padding: 0.625rem;
 }
-.random-character__main-image {
-  width: 12rem;
-  aspect-ratio: 1/1;
+.random-character__content > * + * {
+  margin-left: 0.625rem;
+}
+.random-character__content-image {
+  flex: 0 0 auto;
+  width: 12.5rem;
+  height: 12.5rem;
   object-fit: cover;
 }
-.random-character__main-body {
+.random-character__content-body {
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
 }
-.random-character__main-name {
+.random-character__content-name {
   font-family: var(--font-family-accent);
   font-weight: var(--font-weight-xl);
   font-size: var(--font-size-xl);
   line-height: var(--line-height-sm);
 }
-.random-character__main-text {
+.random-character__content-text {
   margin-top: 0.5rem;
 }
-.random-character__main-buttom-row {
+.random-character__content-footer {
   display: flex;
-  gap: 0.625rem;
   margin-top: auto;
   padding-top: 0.625rem;
 }
+.random-character__content-footer > * + * {
+  margin-left: 0.625rem;
+}
 .random-character__banner {
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
-  flex: 0 0 auto;
   width: 50%;
-  margin-left: auto;
   padding: 0.625rem 0.625rem 0.625rem 1.25rem;
   background: var(--clr-neutral-9) url("/texture.png") center / cover no-repeat;
   color: var(--clr-neutral-0);
 }
-.random-character__banner-label {
+.random-character__banner-title {
   font-family: var(--font-family-accent);
   font-weight: var(--font-weight-xl);
   font-size: var(--font-size-xl);
   line-height: var(--line-height-sm);
 }
-.random-character__banner-buttom-row {
+.random-character__banner-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
   padding-top: 1.25rem;
+}
+.random-character__banner-text {
+}
+.random-character__banner-button {
 }
