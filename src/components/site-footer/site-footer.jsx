@@ -5,9 +5,9 @@ import './site-footer.css';
 
 function SiteFooter() {
   const menuData = [
-    { id: 1, text: 'Home', href: '/practice-marvel-app/' },
-    { id: 2, text: 'Characters', href: '/practice-marvel-app/characters' },
-    { id: 3, text: 'Comics', href: '/practice-marvel-app/comics' },
+    { id: 1, text: 'Home', href: '/' },
+    { id: 2, text: 'Characters', href: '/characters' },
+    { id: 3, text: 'Comics', href: '/comics' },
   ];
 
   return (

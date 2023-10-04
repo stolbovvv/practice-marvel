@@ -1,22 +1,18 @@
-import { RandomCharacter } from './components/random-character/random-character';
-import { AllCharacters } from './components/all-caharacters/all-caharacters';
-import { AllComics } from './components/all-comics/all-comics';
-import { SiteFooter } from './components/site-footer/site-footer';
-import { SiteHeader } from './components/site-header/site-header';
-import { SiteHero } from './components/site-hero/site-hero';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './layouts/layout';
+import HomePage from './pages/home-page';
+import CharacterPage from './pages/characters-page';
+import ComicsPage from './pages/comics-page';
 
 function App() {
   return (
-    <>
-      <SiteHeader />
-      <main className="site-main">
-        <SiteHero title={'Marvel data base'} />
-        <RandomCharacter />
-        <AllCharacters />
-        <AllComics />
-      </main>
-      <SiteFooter />
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="comics" element={<ComicsPage />} />
+        <Route path="characters" element={<CharacterPage />} />
+      </Route>
+    </Routes>
   );
 }
 
