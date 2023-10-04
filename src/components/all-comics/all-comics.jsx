@@ -1,4 +1,5 @@
 import { ComicList } from '../comic-list/comics-list';
+
 import './all-comics.css';
 
 function AllComics() {
