@@ -1,29 +1,36 @@
-import { useEffect } from 'react';
-import { useList } from '../../hooks/useList';
+import { useEffect, useState } from 'react';
+import { apiMarvelService } from '../../services/apiMarvelService';
 import { setClassName } from '../../utilites';
-import { useMarvelService } from '../../services/useMarvelService';
-import { ComicIistItem } from './comics-list-item';
+import { ComicListBody } from './comics-list-body';
 import { ErrorMessage } from '../error-message/error-message';
 import { Spinner } from '../spinner/spinner';
 
 import './comics-list.css';
 
-function View({ data }) {
-  return (
-    <ul className="comic-list__body">
-      {data.map((item, index) => (
-        <ComicIistItem key={`${item.id}_${index}`} data={item} />
-      ))}
-    </ul>
-  );
-}
-
 function ComicList({ classList }) {
-  const { list, setList } = useList(12);
-  const { get, error, loading } = useMarvelService();
+  const COMICS_LIMIT = 8;
+
+  const [loading, setLoading] = useState(false);
+  const [comics, setComics] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [error, setError] = useState(null);
+  const [ended, setEnded] = useState(false);
 
   const updateComics = () => {
-    get.comics({ limin: list.limit, offset: list.offset }).then((data) => setList(data));
+    setLoading(true);
+
+    apiMarvelService
+      .getAllComics({ limit: COMICS_LIMIT, offset: offset })
+      .then((data) => {
+        setLoading(false);
+        setComics((comics) => [...comics, ...data]);
+        setOffset((offset) => offset + COMICS_LIMIT);
+        setEnded(data.length < COMICS_LIMIT);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(error);
+      });
   };
 
   useEffect(() => {
@@ -32,9 +39,13 @@ function ComicList({ classList }) {
 
   return (
     <div className={setClassName('comic-list', classList)}>
-      {error ? <ErrorMessage className={'comic-list__error'} /> : null}
-      {!error ? <View data={list.data} /> : null}
-      <button className="button button_red comic-list__button" onClick={updateComics} disabled={loading}>
+      {error ? <ErrorMessage className={'comic-list__error'} /> : <ComicListBody data={comics} />}
+      <button
+        className="button button_red comic-list__button"
+        style={{ display: ended ? 'none' : 'block' }}
+        disabled={loading}
+        onClick={updateComics}
+      >
         {loading ? <Spinner /> : 'Load more'}
       </button>
     </div>

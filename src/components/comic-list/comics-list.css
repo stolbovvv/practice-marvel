@@ -43,13 +43,14 @@
 }
 .comic-list__item-name {
   font-family: var(--font-family-accent);
+  font-size: var(--font-size-sm);
   text-decoration: none;
   color: inherit;
 }
 .comic-list__item-price {
   font-family: var(--font-family-accent);
-  font-size: var(--font-size-sm);
-  color: var(--clr-neutral-7);
+  font-weight: var(--font-weight-xl);
+  color: var(--clr-neutral-9);
 }
 .comic-list__button {
   align-self: center;

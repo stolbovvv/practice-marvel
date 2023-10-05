@@ -8,7 +8,7 @@ function useHttp() {
   const METHOD = 'GET';
   const HEADERS = { 'Content-Type': 'application/json; charset=utf-8' };
 
-  const requset = useCallback(async (url, { method = METHOD, headers = HEADERS, body = BODY } = {}) => {
+  const request = useCallback(async (url, { method = METHOD, headers = HEADERS, body = BODY } = {}) => {
     setError(null);
     setLoading(true);
 
@@ -30,7 +30,7 @@ function useHttp() {
     }
   }, []);
 
-  return { error, loading, requset };
+  return { error, loading, request };
 }
 
 export { useHttp };

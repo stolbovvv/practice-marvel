@@ -1,20 +1,15 @@
 import { memo } from 'react';
-import { setImageStyles } from '../../utilites';
+import { getImageStyles } from '../../utilites';
 
-const CharacterIistItem = memo(function CharacterIistItem({ data, onSelect }) {
-  const style = setImageStyles(data.image);
+const CharacterListItem = memo(function CharacterListItem({ data, onSelect }) {
+  const style = getImageStyles(data.image);
 
   const handleClick = () => {
     onSelect(data.id);
   };
 
   const handleKeyDown = (e) => {
-    if (e.code && e.code === 'Space') {
-      e.preventDefault();
-      onSelect(data.id);
-    }
-
-    if (e.code && e.code === 'Enter') {
+    if (e.code && e.code === 'Space' && e.code === 'Enter') {
       e.preventDefault();
       onSelect(data.id);
     }
@@ -30,4 +25,4 @@ const CharacterIistItem = memo(function CharacterIistItem({ data, onSelect }) {
   );
 });
 
-export { CharacterIistItem };
+export { CharacterListItem };

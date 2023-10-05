@@ -1,40 +1,51 @@
-import { useEffect } from 'react';
-import { useList } from '../../hooks/useList';
+import { useEffect, useState } from 'react';
+import { apiMarvelService } from '../../services/apiMarvelService';
 import { setClassName } from '../../utilites';
-import { CharacterIistItem } from './character-list-item';
-import { useMarvelService } from '../../services/useMarvelService';
+import { CharacterListBody } from './character-list-body';
 import { ErrorMessage } from '../error-message/error-message';
 import { Spinner } from '../spinner/spinner';
 
 import './character-list.css';
 
-function View({ data, onSelect }) {
-  return (
-    <ul className="character-list__body">
-      {data.map((item) => (
-        <CharacterIistItem key={item.id} data={item} onSelect={onSelect} />
-      ))}
-    </ul>
-  );
-}
-
 function CharacterList({ className, onSelect }) {
-  const { get, error, loading } = useMarvelService();
-  const { list, setList } = useList(9);
+  const CHARACTER_LIMIT = 9;
 
-  const updateList = () => {
-    get.characters({ limit: list.limit, offset: list.offset }).then((data) => setList(data));
+  const [loading, setLoading] = useState(false);
+  const [character, setCharacter] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [error, setError] = useState(null);
+  const [ended, setEnded] = useState(false);
+
+  const updateCharacters = () => {
+    setLoading(true);
+
+    apiMarvelService
+      .getAllCharacters({ limit: CHARACTER_LIMIT, offset: offset })
+      .then((data) => {
+        setLoading(false);
+        setCharacter((character) => [...character, ...data]);
+        setOffset((offset) => offset + CHARACTER_LIMIT);
+        setEnded(data.length < CHARACTER_LIMIT);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(error);
+      });
   };
 
   useEffect(() => {
-    updateList();
+    updateCharacters();
   }, []);
 
   return (
     <div className={setClassName('character-list', className)}>
-      {error ? <ErrorMessage /> : null}
-      {!error ? <View data={list.data} onSelect={onSelect} /> : null}
-      <button className="character-list__button button button_red" onClick={updateList} disabled={loading}>
+      {error ? <ErrorMessage /> : <CharacterListBody data={character} onSelect={onSelect} />}
+      <button
+        className="button button_red character-list__button"
+        style={{ display: ended ? 'none' : 'block' }}
+        disabled={loading}
+        onClick={updateCharacters}
+      >
         {loading ? <Spinner /> : 'Load more'}
       </button>
     </div>

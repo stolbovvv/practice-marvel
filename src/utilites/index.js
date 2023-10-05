@@ -1,6 +1,6 @@
 import { setClassName } from './setClassName';
-import { setTextLength } from './setTextLength';
-import { setImageStyles } from './setImageStyles';
+import { getDescriptionText } from './getDescriptionText';
+import { getImageStyles } from './getImageStyles';
 import { transformCharatersData, transformComicsData } from './transformData';
 
-export { setClassName, setImageStyles, setTextLength, transformCharatersData, transformComicsData };
+export { setClassName, getImageStyles, getDescriptionText, transformCharatersData, transformComicsData };

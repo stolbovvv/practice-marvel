@@ -1,8 +1,8 @@
 import { memo } from 'react';
-import { setImageStyles } from '../../utilites';
+import { getImageStyles } from '../../utilites';
 
-const ComicIistItem = memo(function ComicIistItem({ data }) {
-  const style = setImageStyles(data.image);
+const ComicListItem = memo(function ComicListItem({ data }) {
+  const style = getImageStyles(data.image);
 
   return (
     <li className="comic-list__item">
@@ -17,4 +17,4 @@ const ComicIistItem = memo(function ComicIistItem({ data }) {
   );
 });
 
-export { ComicIistItem };
+export { ComicListItem };
