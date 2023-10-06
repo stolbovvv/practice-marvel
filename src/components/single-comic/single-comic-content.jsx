@@ -15,7 +15,7 @@ function SingleComicContent({ data }) {
           <div className="single-comic__content-body-head">
             <h2 className="single-comic__content-title">{data.title}</h2>
           </div>
-          <p className="single-comic__content-descr">{data.descr}</p>
+          <p className="single-comic__content-descr">{data.descr || 'Comic description not found...'}</p>
           <ul className="single-comic__content-list">
             <li className="single-comic__content-item">
               <spapn className="single-comic__content-item-label">Pages:</spapn>
