@@ -17,6 +17,7 @@ function CharacterList({ className, onSelect }) {
   const [ended, setEnded] = useState(false);
 
   const updateCharacters = () => {
+    setError(null);
     setLoading(true);
 
     apiMarvelService

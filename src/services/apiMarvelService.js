@@ -37,7 +37,7 @@ export const apiMarvelService = {
   },
 
   getAllComics: async ({ limit = 12, offset = 0 }) => {
-    const { data } = await getMarvelServiceData(`/comics`, { limit, offset });
+    const { data } = await getMarvelServiceData(`/comics`, { limit, offset, format: 'comic', formatType: 'comic' });
 
     return data.results.map(transformComicsData);
   },

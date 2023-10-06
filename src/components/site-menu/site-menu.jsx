@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { setClassName } from '../../utilites';
 
 import './site-menu.css';
@@ -6,9 +6,9 @@ import './site-menu.css';
 function SiteMenu({ className, data }) {
   const items = data.map(({ id, text, href }) => (
     <li className="site-menu__item" key={id}>
-      <Link className="site-menu__link" to={href}>
+      <NavLink className="site-menu__link" to={href}>
         {text}
-      </Link>
+      </NavLink>
     </li>
   ));
 

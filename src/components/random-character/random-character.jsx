@@ -1,17 +1,30 @@
 import { useEffect, useState } from 'react';
-import { useMarvelService } from '../../services/useMarvelService';
 import { RandomCharacterContent } from './random-character-content';
+import { apiMarvelService } from '../../services/apiMarvelService';
 import { ErrorMessage } from '../error-message/error-message';
 import { Spinner } from '../spinner/spinner';
 
 import './random-character.css';
 
 function RandomCharacter() {
-  const { get, error, loading } = useMarvelService();
   const [character, setCharacter] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const updateCharacter = () => {
-    get.character({ id: Math.floor(Math.random() * 500 + 1011000) }).then((data) => setCharacter(data));
+    setError(null);
+    setLoading(true);
+
+    apiMarvelService
+      .getSingleCharacter({ id: Math.floor(Math.random() * 500 + 1011000) })
+      .then((data) => {
+        setLoading(false);
+        setCharacter(data[0]);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(error);
+      });
   };
 
   useEffect(() => {

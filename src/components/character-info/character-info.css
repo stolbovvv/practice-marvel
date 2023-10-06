@@ -15,12 +15,12 @@
   margin: 0.625rem auto;
   min-height: 19rem;
 }
-.character-info__placeholder {
+.character-info__idle {
   padding: 0.625rem;
   background: var(--clr-neutral-9) url("/texture.png") center / cover no-repeat;
   color: var(--clr-neutral-0);
 }
-.character-info__placeholder-text {
+.character-info__idle-text {
   font-family: var(--font-family-accent);
   font-weight: var(--font-weight-xl);
   font-size: var(--font-size-xl);

@@ -17,6 +17,11 @@
   text-decoration: none;
   color: inherit;
 }
+.site-menu__link.active {
+  color: var(--clr-red-1);
+  text-decoration: underline;
+  text-decoration-thickness: 0.25em;
+}
 .site-menu__link:is(:hover, :focus) {
   color: var(--clr-red-2);
 }

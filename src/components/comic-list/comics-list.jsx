@@ -17,6 +17,7 @@ function ComicList({ classList }) {
   const [ended, setEnded] = useState(false);
 
   const updateComics = () => {
+    setError(null);
     setLoading(true);
 
     apiMarvelService
