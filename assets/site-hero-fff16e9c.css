@@ -1,0 +1,1 @@
+.site-hero{display:flex;flex-direction:column;padding-block:2.5rem}.site-hero__container{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;min-height:15rem}.site-hero__title{font-family:var(--font-family-accent);font-weight:var(--font-weight-xl);font-size:var(--font-size-2xl);line-height:var(--line-height-sm);text-align:center;text-transform:uppercase}

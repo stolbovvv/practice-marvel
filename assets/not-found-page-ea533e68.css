@@ -1,0 +1,1 @@
+.not-found{margin-block:auto}.not-found__container{display:flex;flex-direction:column}.not-found__title{font-family:var(--font-family-accent);font-weight:var(--font-weight-xl);font-size:var(--font-size-2xl);color:var(--clr-red-1)}.not-found__message{margin-top:2rem}.not-found__button{margin-top:2rem;align-self:flex-start}
