@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { apiMarvelService } from '../../services/apiMarvelService';
 import { ErrorMessage } from '../error-message/error-message';
 import { Spinner } from '../spinner/spinner';
