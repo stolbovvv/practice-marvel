@@ -36,6 +36,12 @@ export const apiMarvelService = {
     return data.results.map(transformCharatersData);
   },
 
+  getSingleCharacterByName: async ({ name }) => {
+    const { data } = await getMarvelServiceData(`/characters`, { name });
+
+    return data.results.map(transformCharatersData);
+  },
+
   getAllComics: async ({ limit = 12, offset = 0 }) => {
     const { data } = await getMarvelServiceData(`/comics`, { limit, offset, format: 'comic', formatType: 'comic' });
 

@@ -1,7 +1,7 @@
 function CharacterInfoIdle({ text }) {
   return (
     <div className="character-info__idle">
-      <p className="character-info__idle-text">{text}</p>
+      <h3 className="character-info__idle-text">{text}</h3>
     </div>
   );
 }

@@ -13,7 +13,10 @@
 }
 .all-caharacters__list {
 }
-.all-caharacters__info {
+.all-caharacters__sidebar {
   position: sticky;
   top: 1.25rem;
+}
+.all-caharacters__sidebar > * + * {
+  margin-top: 1.25rem;
 }
