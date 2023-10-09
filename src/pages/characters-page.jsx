@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet';
 import { AllCharacters } from '../components/all-caharacters/all-caharacters';
 import { SiteHero } from '../components/site-hero/site-hero';
 
-function CharacterPage() {
+function CharactersPage() {
   return (
     <>
       <Helmet>
@@ -15,4 +15,4 @@ function CharacterPage() {
   );
 }
 
-export default CharacterPage;
+export default CharactersPage;

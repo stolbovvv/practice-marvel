@@ -1,45 +1,26 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { apiMarvelService } from '../../services/apiMarvelService';
-import { SingleCharacterContent } from './single-character-content';
-import { ErrorMessage } from '../error-message/error-message';
-import { Spinner } from '../spinner/spinner';
+import { Link } from 'react-router-dom';
+import { getImageStyles } from '../../utilites';
 
 import './single-character.css';
 
-function SingleCharacter() {
-  const { id } = useParams();
-
-  const [character, setCharacter] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const updateCharacter = () => {
-    setError(null);
-    setLoading(true);
-
-    apiMarvelService
-      .getSingleCharacter({ id: id })
-      .then((data) => {
-        setLoading(false);
-        setCharacter(data[0]);
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError(error);
-      });
-  };
-
-  useEffect(() => {
-    updateCharacter();
-  }, []);
+function SingleCharacter({ data }) {
+  const style = getImageStyles(data.image);
 
   return (
     <section className="section single-character">
       <div className="container single-character__container">
-        {error && <ErrorMessage className={'single-character__error'} />}
-        {loading && <Spinner className={'single-character__spinner'} />}
-        {!loading && !error && character && <SingleCharacterContent data={character} />}
+        <Link className="single-character__link-back" to={'/characters'}>
+          BACK TO ALL CHARACTERS
+        </Link>
+        <div className="single-character__content">
+          <img className="single-character__content-image" src={data.image} alt={`${data.name} image`} style={style} />
+          <div className="single-character__content-body">
+            <div className="single-character__content-body-head">
+              <h2 className="single-character__content-title">{data.name}</h2>
+            </div>
+            <p className="single-character__content-descr">{data.descr || 'Character description not found...'}</p>
+          </div>
+        </div>
       </div>
     </section>
   );

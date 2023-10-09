@@ -58,6 +58,12 @@
   text-wrap: balance;
   color: var(--clr-red-1);
 }
+.character-search__main-text {
+  margin: 0.625rem;
+  padding-left: 0.625rem;
+  font-weight: var(--font-weight-lg);
+  text-wrap: balance;
+}
 .character-search__main-result {
   margin: 0.625rem;
   display: flex;

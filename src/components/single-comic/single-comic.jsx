@@ -1,47 +1,42 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { apiMarvelService } from '../../services/apiMarvelService';
-import { ErrorMessage } from '../error-message/error-message';
-import { Spinner } from '../spinner/spinner';
-import { SingleComicContent } from './single-comic-content';
+import { Link } from 'react-router-dom';
+import { getImageStyles } from '../../utilites';
 
 import './single-comic.css';
 
-function SingleComic() {
-  const { id } = useParams();
-
-  const [comic, setComic] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const updateComic = () => {
-    setError(null);
-    setLoading(true);
-
-    apiMarvelService
-      .getSingleComic({ id: id })
-      .then((data) => {
-        setLoading(false);
-        setComic(data[0]);
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError(error);
-      });
-  };
-
-  useEffect(() => {
-    updateComic();
-  }, []);
+function SingleComic({ data }) {
+  const style = getImageStyles(data.image);
 
   return (
-    <section className="section single-comic">
-      <div className="container single-comic__container">
-        {error && <ErrorMessage className={'single-comic__error'} />}
-        {loading && <Spinner className={'single-comic__spinner'} />}
-        {!loading && !error && comic && <SingleComicContent data={comic} />}
-      </div>
-    </section>
+    <>
+      <section className="section single-comic">
+        <div className="container single-comic__container">
+          <Link className="single-comic__link-back" to={'/comics'}>
+            BACK TO ALL COMICS
+          </Link>
+          <div className="single-comic__content">
+            <img className="single-comic__content-image" src={data.image} alt={`${data.name} image`} style={style} />
+            <div className="single-comic__content-body">
+              <div className="single-comic__content-body-head">
+                <h2 className="single-comic__content-title">{data.title}</h2>
+              </div>
+              <p className="single-comic__content-descr">{data.descr || 'Comic description not found...'}</p>
+              <ul className="single-comic__content-list">
+                <li className="single-comic__content-item">
+                  <spapn className="single-comic__content-item-label">Pages:</spapn>
+                  <spapn className="single-comic__content-item-value">{data.pageCount}</spapn>
+                </li>
+                <li className="single-comic__content-item">
+                  <spapn className="single-comic__content-item-label">Price:</spapn>
+                  <spapn className="single-comic__content-item-value">
+                    {data.price ? `${data.price}$` : 'Not available'}
+                  </spapn>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 

@@ -31,11 +31,6 @@
 .single-comic__link-back:is(:hover, :focus) {
   color: var(--clr-red-2);
 }
-.single-comic__error {
-}
-.single-comic__spinner {
-  margin: auto;
-}
 .single-comic__content {
   display: flex;
 }

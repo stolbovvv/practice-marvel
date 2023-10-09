@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { apiMarvelService } from '../../services/apiMarvelService';
 import { ErrorMessage } from '../error-message/error-message';
@@ -11,24 +11,37 @@ function CharacterSearch() {
   const { register, handleSubmit, formState } = useForm();
 
   const [character, setCharactre] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [process, setProcess] = useState('pending');
   const [error, setError] = useState(null);
 
   const onSubmit = ({ name }) => {
     setError(null);
-    setLoading(true);
+    setProcess('loading');
 
     apiMarvelService
-      .getSingleCharacterByName({ name })
+      .getSingleCharacterByName({ name: name })
       .then((data) => {
-        setLoading(false);
-        setCharactre(data.length ? data[0] : 'not-found');
+        if (data.length) {
+          setCharactre(data[0]);
+          setProcess('success');
+        } else {
+          setCharactre(null);
+          setProcess('absence');
+        }
       })
       .catch((error) => {
-        setLoading(false);
         setError(error);
+        setProcess('failure');
       });
   };
+
+  useEffect(() => {
+    if (formState.errors.name) {
+      setProcess('require');
+    } else {
+      setProcess('pending');
+    }
+  }, [formState.errors.name?.message]);
 
   return (
     <div className="character-search">
@@ -48,15 +61,13 @@ function CharacterSearch() {
         </form>
       </div>
       <div className="character-search__main">
-        {error && <ErrorMessage className={'character-search__main-error'} />}
-        {loading && <Spinner className={'character-search__main-spinner'} />}
-        {!loading && !error && formState.errors.name && (
-          <p className="character-search__main-warning">Please, enter a character name!</p>
+        {process === 'loading' && <Spinner className={'character-search__main-spinner'} />}
+        {process === 'failure' && <ErrorMessage className={'character-search__main-error'} info={error.message} />}
+        {process === 'require' && <p className="character-search__main-warning">Please, enter a character name!</p>}
+        {process === 'absence' && (
+          <p className="character-search__main-text">The character was not found. Check the name and try again.</p>
         )}
-        {!loading && !error && !formState.errors.name && character === 'not-found' && (
-          <p className="character-search__main-warning">The character was not found. Check the name and try again.</p>
-        )}
-        {!loading && !error && !formState.errors.name && character !== 'not-found' && character && (
+        {process === 'success' && (
           <div className="character-search__main-result">
             <p className="character-search__main-reuslt-text">{`There is! Visit ${character.name} page?`}</p>
             <Link className="button button_black character-search__main-button" to={`/characters/${character.id}`}>

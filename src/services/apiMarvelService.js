@@ -6,7 +6,7 @@ const API_KEY = 'e3d5971519104048e242dfe93fbb9ab0';
 
 async function getMarvelServiceData(endpoint, params) {
   try {
-    const response = await axios.get(`${API_URL}/${endpoint}`, {
+    const response = await axios.get(`${API_URL}${endpoint}`, {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },

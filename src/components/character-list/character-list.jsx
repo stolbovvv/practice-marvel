@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useList } from '../../hooks';
 import { apiMarvelService } from '../../services/apiMarvelService';
 import { setClassName } from '../../utilites';
 import { CharacterListBody } from './character-list-body';
@@ -8,47 +9,44 @@ import { Spinner } from '../spinner/spinner';
 import './character-list.css';
 
 function CharacterList({ className, onSelect }) {
-  const CHARACTER_LIMIT = 9;
-
-  const [loading, setLoading] = useState(false);
-  const [character, setCharacter] = useState([]);
-  const [offset, setOffset] = useState(0);
+  const [characters, updateCharacters] = useList({ initLimit: 9 });
+  const [process, setProcess] = useState('pending');
   const [error, setError] = useState(null);
-  const [ended, setEnded] = useState(false);
 
-  const updateCharacters = () => {
+  const appendCharacters = () => {
     setError(null);
-    setLoading(true);
+    setProcess('loading');
 
     apiMarvelService
-      .getAllCharacters({ limit: CHARACTER_LIMIT, offset: offset })
+      .getAllCharacters({ limit: characters.limit, offset: characters.offset })
       .then((data) => {
-        setLoading(false);
-        setCharacter((character) => [...character, ...data]);
-        setOffset((offset) => offset + CHARACTER_LIMIT);
-        setEnded(data.length < CHARACTER_LIMIT);
+        updateCharacters({ data: data });
+        setProcess('success');
       })
       .catch((error) => {
-        setLoading(false);
         setError(error);
+        setProcess('failure');
       });
   };
 
   useEffect(() => {
-    updateCharacters();
+    appendCharacters();
   }, []);
+
+  useEffect(() => {
+    if (characters.ended) setProcess('ending');
+  }, [characters.ended]);
 
   return (
     <div className={setClassName('character-list', className)}>
-      {error ? <ErrorMessage /> : <CharacterListBody data={character} onSelect={onSelect} />}
-      <button
-        className="button button_red character-list__button"
-        style={{ display: ended ? 'none' : 'block' }}
-        disabled={loading}
-        onClick={updateCharacters}
-      >
-        {loading ? <Spinner /> : 'Load more'}
-      </button>
+      {process === 'failure' && <ErrorMessage info={error.message} />}
+      {process !== 'failure' && <CharacterListBody data={characters.list} onSelect={onSelect} />}
+      {process === 'loading' && <Spinner size="2.625rem" style={{ marginInline: 'auto' }} />}
+      {process !== 'loading' && process !== 'ending' && (
+        <button className="button button_red character-list__button" onClick={appendCharacters}>
+          Load more
+        </button>
+      )}
     </div>
   );
 }

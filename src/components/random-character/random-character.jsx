@@ -8,22 +8,22 @@ import './random-character.css';
 
 function RandomCharacter() {
   const [character, setCharacter] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [process, setProcess] = useState('pending');
   const [error, setError] = useState(null);
 
   const updateCharacter = () => {
     setError(null);
-    setLoading(true);
+    setProcess('loading');
 
     apiMarvelService
       .getSingleCharacter({ id: Math.floor(Math.random() * 500 + 1011000) })
       .then((data) => {
-        setLoading(false);
         setCharacter(data[0]);
+        setProcess('success');
       })
       .catch((error) => {
-        setLoading(false);
         setError(error);
+        setProcess('failure');
       });
   };
 
@@ -37,9 +37,9 @@ function RandomCharacter() {
         <h2 className="title random-character__title">Random character for today!</h2>
 
         <div className="random-character__body">
-          {error ? <ErrorMessage className={'random-character__error'} /> : null}
-          {loading ? <Spinner className={'random-character__spinner'} /> : null}
-          {!loading && !error && character ? <RandomCharacterContent data={character} /> : null}
+          {process === 'failure' && <ErrorMessage className={'random-character__error'} info={error.message} />}
+          {process === 'loading' && <Spinner className={'random-character__spinner'} />}
+          {process === 'success' && <RandomCharacterContent data={character} />}
           <div className="random-character__banner">
             <p className="random-character__banner-title">Do you want to get to know him better?</p>
             <div className="random-character__banner-footer">

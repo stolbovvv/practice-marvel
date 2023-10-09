@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useList } from '../../hooks';
 import { apiMarvelService } from '../../services/apiMarvelService';
 import { setClassName } from '../../utilites';
 import { ComicListBody } from './comics-list-body';
@@ -8,47 +9,44 @@ import { Spinner } from '../spinner/spinner';
 import './comics-list.css';
 
 function ComicList({ classList }) {
-  const COMICS_LIMIT = 8;
-
-  const [loading, setLoading] = useState(false);
-  const [comics, setComics] = useState([]);
-  const [offset, setOffset] = useState(0);
+  const [comics, updateComics] = useList({ initLimit: 8 });
+  const [process, setProcess] = useState('pending');
   const [error, setError] = useState(null);
-  const [ended, setEnded] = useState(false);
 
-  const updateComics = () => {
+  const appendComics = () => {
     setError(null);
-    setLoading(true);
+    setProcess('loading');
 
     apiMarvelService
-      .getAllComics({ limit: COMICS_LIMIT, offset: offset })
+      .getAllComics({ limit: comics.limit, offset: comics.offset })
       .then((data) => {
-        setLoading(false);
-        setComics((comics) => [...comics, ...data]);
-        setOffset((offset) => offset + COMICS_LIMIT);
-        setEnded(data.length < COMICS_LIMIT);
+        updateComics({ data: data });
+        setProcess('success');
       })
       .catch((error) => {
-        setLoading(false);
         setError(error);
+        setProcess('failure');
       });
   };
 
   useEffect(() => {
-    updateComics();
+    appendComics();
   }, []);
+
+  useEffect(() => {
+    if (comics.ended) setProcess('ending');
+  }, [comics.ended]);
 
   return (
     <div className={setClassName('comic-list', classList)}>
-      {error ? <ErrorMessage className={'comic-list__error'} /> : <ComicListBody data={comics} />}
-      <button
-        className="button button_red comic-list__button"
-        style={{ display: ended ? 'none' : 'block' }}
-        disabled={loading}
-        onClick={updateComics}
-      >
-        {loading ? <Spinner /> : 'Load more'}
-      </button>
+      {process === 'failure' && <ErrorMessage info={error.message} />}
+      {process !== 'failure' && <ComicListBody data={comics.list} />}
+      {process === 'loading' && <Spinner size="2.625rem" style={{ marginInline: 'auto' }} />}
+      {process !== 'loading' && process !== 'ending' && (
+        <button className="button button_red comic-list__button" onClick={appendComics}>
+          Load more
+        </button>
+      )}
     </div>
   );
 }

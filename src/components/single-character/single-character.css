@@ -17,7 +17,6 @@
   align-items: center;
   font-family: var(--font-family-accent);
   font-weight: var(--font-weight-lg);
-
   text-decoration: none;
   color: inherit;
 }
@@ -30,11 +29,6 @@
 }
 .single-character__link-back:is(:hover, :focus) {
   color: var(--clr-red-2);
-}
-.single-character__error {
-}
-.single-character__spinner {
-  margin: auto;
 }
 .single-character__content {
   display: flex;

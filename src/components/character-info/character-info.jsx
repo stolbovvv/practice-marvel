@@ -10,24 +10,24 @@ import './character-info.css';
 
 function CharacterInfo({ className, selected }) {
   const [character, setCharacter] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [process, setProcess] = useState('pending');
   const [error, setError] = useState(null);
 
   const updateCharactre = () => {
     if (!selected) return;
 
     setError(null);
-    setLoading(true);
+    setProcess('loading');
 
     apiMarvelService
       .getSingleCharacter({ id: selected })
       .then((data) => {
-        setLoading(false);
         setCharacter(data[0]);
+        setProcess('success');
       })
       .catch((error) => {
-        setLoading(false);
         setError(error);
+        setProcess('failure');
       });
   };
 
@@ -37,10 +37,10 @@ function CharacterInfo({ className, selected }) {
 
   return (
     <div className={setClassName('character-info', className)}>
-      {error ? <ErrorMessage className={'character-info__error'} /> : null}
-      {loading ? <Spinner className={'character-info__spinner'} /> : null}
-      {!loading && !error && character ? <CharacterInfoContent data={character} /> : null}
-      {!loading && !error && !character ? <CharacterInfoIdle text={'Choose a character'} /> : null}
+      {process === 'pending' && <CharacterInfoIdle text={'Choose a character'} />}
+      {process === 'loading' && <Spinner className={'character-info__spinner'} />}
+      {process === 'success' && <CharacterInfoContent data={character} />}
+      {process === 'failure' && <ErrorMessage className={'character-info__error'} info={error.message} />}
     </div>
   );
 }
