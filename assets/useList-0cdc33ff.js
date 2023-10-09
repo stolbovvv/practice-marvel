@@ -1,0 +1,1 @@
+import{r as e}from"./index-54acc16d.js";function i({initLimit:t=0,initOffset:a=0}){const[n,u]=e.useState(a),[r,c]=e.useState(!1),[f,l]=e.useState([]);return[{offset:n,limit:t,ended:r,list:f},({data:o})=>{u(s=>s+t),c(o.length<t),l(s=>[...s,...o])}]}export{i as u};
