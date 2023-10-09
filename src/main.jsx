@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './styles/index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter basename="/practice-marvel-app">
+  <BrowserRouter basename="/practice-react-marvel">
     <App />,
   </BrowserRouter>,
 );
