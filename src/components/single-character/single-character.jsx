@@ -1,24 +1,45 @@
-import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { apiMarvelService } from '../../services/apiMarvelService';
+import { SingleCharacterContent } from './single-character-content';
+import { ErrorMessage } from '../error-message/error-message';
+import { Spinner } from '../spinner/spinner';
+
+import './single-character.css';
 
 function SingleCharacter() {
   const { id } = useParams();
-  const [charactre, setCharactre] = useState(null);
+
+  const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const updateCharacter = () => {
+    setError(null);
+    setLoading(true);
+
+    apiMarvelService
+      .getSingleCharacter({ id: id })
+      .then((data) => {
+        setLoading(false);
+        setCharacter(data[0]);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(error);
+      });
+  };
+
+  useEffect(() => {
+    updateCharacter();
+  }, []);
+
   return (
-    <section className="section single-charactre">
-      <div className="container single-charactre__container">
-        <div className="single-charactre__head">
-          <h2 className="title single-charactre__title">Charactre name</h2>
-          <Link className="single-charactre__link" to={'/comics'}>
-            Back to all
-          </Link>
-        </div>
-        <div className="single-charactre__body">
-          <img className="single-charactre__image" src="" alt="" />
-        </div>
+    <section className="section single-character">
+      <div className="container single-character__container">
+        {error && <ErrorMessage className={'single-character__error'} />}
+        {loading && <Spinner className={'single-character__spinner'} />}
+        {!loading && !error && character && <SingleCharacterContent data={character} />}
       </div>
     </section>
   );

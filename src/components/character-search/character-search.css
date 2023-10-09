@@ -27,7 +27,52 @@
 .character-search__form-input {
   flex: 1 1 auto;
   padding: 0.5em;
+  outline-offset: 0.25rem;
 }
 .character-search__form-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex: 0 0 auto;
+  width: 7.5rem;
+}
+.character-search__main {
+  display: flex;
+  flex-direction: column;
+}
+.character-search__main_hidden {
+  padding: 0;
+  min-height: auto;
+}
+.character-search__main-spinner {
+  align-self: center;
+  margin: 1.25rem;
+}
+.character-search__main-error {
+  margin: 0.625rem;
+}
+.character-search__main-warning {
+  margin: 0.625rem;
+  padding-left: 0.625rem;
+  font-weight: var(--font-weight-lg);
+  text-wrap: balance;
+  color: var(--clr-red-1);
+}
+.character-search__main-result {
+  margin: 0.625rem;
+  display: flex;
+  align-items: center;
+}
+.character-search__main-reuslt-text {
+  flex: 1 1 auto;
+  padding-left: 0.625rem;
+  font-weight: var(--font-weight-lg);
+  text-wrap: balance;
+}
+.character-search__main-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 7.5rem;
 }
